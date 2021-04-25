@@ -2,8 +2,6 @@
 
 #include "Node.h"
 
-using namespace std;
-
 Node::Node(){ // Default constructor
     operandValue = 0;
     operatorValue = '0';
