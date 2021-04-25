@@ -1,8 +1,6 @@
-#include <iostream>
-
 #include "Stack.h"
 #include "Node.h"
-
+#include <iostream>
 using namespace std;
 
 Stack::Stack(){ // Default constructor

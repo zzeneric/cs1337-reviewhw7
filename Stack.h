@@ -3,8 +3,6 @@
 
 #include "Node.h"
 
-using namespace std;
-
 class Stack{
     public:
         Stack(); // Default constructor

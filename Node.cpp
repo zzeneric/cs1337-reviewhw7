@@ -1,13 +1,11 @@
-#include <iostream>
-
 #include "Node.h"
-
+#include <iostream>
 using namespace std;
 
 Node::Node(){ // Default constructor
     operandValue = 0;
     operatorValue = '0';
-    next = NULL;
+    next = nullptr;
 }
 
 Node::Node(double operandTo, char operatorTo){ // Overloaded constructor
@@ -25,6 +23,10 @@ char Node::getOperator() const{ // Accessor for operator
 
 Node* Node::getNext() const{ // Accessor for next
     return next;
+}
+
+Node::~Node(){ // Destructor
+    cout << "Destroyed" << endl;
 }
 
 
