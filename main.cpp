@@ -5,8 +5,8 @@ using namespace std;
 
 int main(){
     Node* head;
-    head->setOperand(1);
-    //head->setOperator('A');
+    //head->setOperand(1);
+    head->setOperator('A');
 
     /*Stack* stackA = new Stack();
     stackA->setHead(head);
