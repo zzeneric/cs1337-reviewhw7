@@ -3,6 +3,7 @@
 
 #include "Node.h"
 
+using namespace std;
 
 class Stack{
     public:
