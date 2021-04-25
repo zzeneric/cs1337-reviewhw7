@@ -1,14 +1,24 @@
-#include "Node.cpp"
+#ifndef STACK_H
+#define STACK_H
+
+#include "Node.h"
+
 
 class Stack{
     public:
         Stack(); // Default constructor
         Stack(Node* origin); // Overloaded constructor (node pointer parameter, assigns head to node passed in)
-        // Copy constructor (creates copy of the stack passed in)
-        void Stack::destroy(Node* head); // Destructor (deletes linked list)
+        
+        void destroy(Node* head); // Destructor (deletes linked list)
+        //Node* copy(Node* head); // Copy constructor
 
-        Node* Stack::getHead() const; // Accessor
-        void Stack::setHead(Node* newHead); // Mutator
+        Node* getHead() const; // Accessor
+        void setHead(Node* newHead); // Mutator
+
+        void push(Node* head, Node* newHead); // Push
+        void display(Node* head); // Display
     private:
         Node* head; // Head pointer
 };
+
+#endif

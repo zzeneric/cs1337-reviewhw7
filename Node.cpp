@@ -1,22 +1,24 @@
 #include <iostream>
+
 #include "Node.h"
 
 Node::Node(){ // Default constructor
+    operandValue = 0;
+    operatorValue = '0';
     next = NULL;
 }
 
-Node::Node(const Node& origin){ // Overloaded constructor
-    operand = origin.operand;
-    operator = origin.operator;
-    next = origin.next;
+Node::Node(double operandTo, char operatorTo){ // Overloaded constructor
+    operandValue = operandTo;
+    operatorValue = operatorTo;
 }
 
 double Node::getOperand() const{ // Accessor for operand
-    return operand;
+    return operandValue;
 }
 
 char Node::getOperator() const{ // Accessor for operator
-    return operator;
+    return operatorValue;
 }
 
 Node* Node::getNext() const{ // Accessor for next
@@ -25,16 +27,16 @@ Node* Node::getNext() const{ // Accessor for next
 
 
 void Node::setOperand(double operandTo){ // Mutator for operand
-    operand = operandTo;
+    operandValue = operandTo;
 }
 
 void Node::setOperator(char operatorTo){ // Mutator for operator
-    operator = operatorTo;
+    operatorValue = operatorTo;
 }
 
 void Node::setNext(Node* nextTo){ // Mutator for next
     if(nextTo == NULL)
         next = NULL;
     else
-        next = nextTo->next;
+        next = nextTo;
 }

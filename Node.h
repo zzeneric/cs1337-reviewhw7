@@ -1,17 +1,22 @@
+#ifndef NODE_H
+#define NODE_H
+
 class Node{
     public:
         Node();
-        Node(const Node& origin);
+        Node(double operandTo, char operatorTo);
 
-        double Node::getOperand() const; // Accessor
-        char Node::getOperator() const; // Accessor
+        double getOperand() const; // Accessor
+        char getOperator() const; // Accessor
         Node* getNext() const; // Accessor
 
-        void Node::setOperand(double operandTo); // Mutator
-        void Node::setOperator(char operatorTo); // Mutator
+        void setOperand(double operandTo); // Mutator
+        void setOperator(char operatorTo); // Mutator
         void setNext(Node* nextTo); // Mutator
     private:
-        double operand;
-        char operator;
+        double operandValue;
+        char operatorValue;
         Node* next;
 };
+
+#endif
