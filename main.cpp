@@ -4,7 +4,7 @@
 using namespace std;
 
 int main(){
-    Node* head = new Node();
+    Node* head;
     head->setOperand(1);
     //head->setOperator('A');
 
