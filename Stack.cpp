@@ -1,98 +1,116 @@
+#include <iostream>
 #include "Stack.h"
 #include "Node.h"
-#include <iostream>
 using namespace std;
 
 Stack::Stack(){ // Default constructor
-    head = NULL;
+    head = nullptr;
 }
 
 Stack::Stack(Node* origin){ // Overloaded constructor
     head = origin;
 }
 
-void Stack::destroy(Node* head){ // Destroyer
-    Node* iterator = head;
-    cout << "DESTROYING: " << endl;
-    while (iterator != 0){
-        Node* next = iterator->getNext();
-        head = next;
-        Stack::display(head);
-        delete iterator;
-        iterator = head;
+Stack::~Stack(){ // Delete
+    //cout << "DELETING: " << endl;
+    Node* current = head;
+    Node* next;
+
+    while (current != nullptr) {
+        //cout << "Destroyed: " << current->getOperand() << endl;
+        next = current->getNext();
+        delete current;
+        current = next;
     }
-    cout << endl;
-    
-    delete head;
 }
 
-/*Node* Stack::copy(Node* head){
-    Node* temp = head;
-    Node* copy = new Node();
+Stack::Stack(Stack const &origObject){ // Copy constructor
+    Node* origHead = origObject.getHead();
+    
+    Node* newHead = new Node();
+    newHead->setOperand(origHead->getOperand());
+    newHead->setOperator(origHead->getOperator());
 
-    copy->setOperand(temp->getOperand());
-    copy->setOperator(temp->getOperator());
-    copy->setNext(NULL);
+    Node* current = origHead->getNext();
+    Node* lastNode = newHead;
 
-    Node* newHead = copy;
+    while (current != nullptr) {
+        Node* newNode = new Node();
+        newNode->setOperand(current->getOperand());
+        newNode->setOperator(current->getOperator());
+        lastNode->setNext(newNode);
 
-    temp = temp->getNext();
-
-    while (temp != NULL){
-        copy = temp;
-
-        copy->setOperand(temp->getOperand());
-        copy->setOperator(temp->getOperator());
-
-        copy->setNext(NULL);
-
-        temp = temp->getNext();
+        lastNode = newNode;
+        current = current->getNext();
     }
     
-    return newHead;
-}*/
-
-Node* Stack::getHead() const{
-    return head;
-}
-
-void Stack::setHead(Node* newHead){
     head = newHead;
 }
 
-void Stack::push(Node* head, Node* newHead){
-    Node* temp = new Node();
-
-    temp->setOperand(newHead->getOperand());
-    temp->setOperator(newHead->getOperator());
-    
-    newHead->setOperand(head->getOperand());
-    newHead->setOperator(head->getOperator());
-
-    head->setOperand(temp->getOperand());
-    head->setOperator(temp->getOperator());
-
-    delete temp;
- 
-    // Put top pointer reference into temp link
-    newHead->setNext(head->getNext());
-    head->setNext(newHead);
+Node* Stack::getHead() const{ // Get head
+    return head;
 }
 
-void Stack::display(Node* head){
-    struct Node* temp;
-    cout << "DISPLAY: " << endl;
+void Stack::setHead(Node* newHead){ // Set head
+    head = newHead;
+}
 
-    if (head == NULL){
-        cout << "No items left in stack!";
+void operator<<(Stack& inputStack, Node* newHead){ // Push
+    if(inputStack.getHead() != nullptr){
+        Node* head = inputStack.getHead();
+
+        Node* temp = new Node();
+
+        temp->setOperand(newHead->getOperand());
+        temp->setOperator(newHead->getOperator());
+
+        newHead->setOperand(head->getOperand());
+        newHead->setOperator(head->getOperator());
+
+        head->setOperand(temp->getOperand());
+        head->setOperator(temp->getOperator());
+
+        delete temp;
+ 
+        newHead->setNext(head->getNext());
+        head->setNext(newHead);
+    }else{
+        inputStack.setHead(newHead);
+    }
+
+    
+}
+
+void operator>>(Stack& inputStack, const Node* &holder){ // Pop
+    Node* toPop = inputStack.getHead();
+    inputStack.setHead(toPop->getNext());  
+
+    holder = toPop;
+    cout << "POPPED2: " << &holder << " " << holder->getOperand() << holder->getOperator() << endl;
+    cout << &holder << endl;
+}
+
+ostream& operator<<(ostream& os, const Stack& inputStack){ // Display
+    Node* head = inputStack.getHead();
+    Node* temp;
+
+    if (head == nullptr){
+        os << "No items left in stack!";
     }else{
         temp = head;
-        while (temp != NULL){
-            cout << temp->getOperand() << "/" << temp->getOperator() << " -> ";
- 
+        while (temp != nullptr){
+            if(temp->getOperator() != '0'){
+                os << temp->getOperator();
+            }else if(temp->getOperand() != 0){
+                os << temp->getOperand();
+            }
+            
+
             temp = temp->getNext();
+            if(temp != nullptr){
+                os << ", ";
+            }
         }
     }
-    cout << endl;
-    delete temp;
+    return os;
 }

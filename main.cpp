@@ -1,32 +1,35 @@
 #include <iostream>
-//#include "Stack.h"
+#include "Stack.h"
 #include "Node.h"
+
 using namespace std;
 
-int main(){
-    Node* head;
-    //head->setOperand(1);
-    head->setOperator('A');
+int main()
+{
+    Node *head = new Node(1, 'A');
+    Stack *stackA = new Stack(head);
 
-    /*Stack* stackA = new Stack();
-    stackA->setHead(head);
-
-    Node* node1 = new Node(2, 'B');
-    Node* node2 = new Node(3, 'C');
-    Node* node3 = new Node(4, 'D');
-    Node* node4 = new Node(5, 'E');
+    Node *node1 = new Node(2, 'B');
+    Node *node2 = new Node(3, 'C');
+    Node *node3 = new Node(4, 'D');
     
-    stackA->push(head, node1);
-    stackA->push(head, node2);
-    stackA->push(head, node3);
-    stackA->push(head, node4);
+    *stackA << node1;
+    *stackA << node2;
+    *stackA << node3;
 
-    //Stack* stackB = new Stack();
-    //stackB->copy(head);
+    cout << *stackA << endl;
+    cout << endl;
 
-    stackA->display(head);
+    const Node* holder = new Node();
+    *stackA >> holder;
+    
+    cout << "POPPED1: " << &holder << " " << holder->getOperand() << holder->getOperator() << endl;
 
-    stackA->destroy(head);*/
+    //Stack *stackB = new Stack();
+    //*stackB << node1;
+
+    //cout << *stackB << endl;
+    delete holder;
 
     return 0;
 }

@@ -25,11 +25,6 @@ Node* Node::getNext() const{ // Accessor for next
     return next;
 }
 
-Node::~Node(){ // Destructor
-    cout << "Destroyed" << endl;
-}
-
-
 void Node::setOperand(double operandTo){ // Mutator for operand
     operandValue = operandTo;
 }
